@@ -1,7 +1,7 @@
 {
   "name": "NutreTB Panamá Oeste",
   "short_name": "NutreTB",
-  "start_url": "index.html",
+  "start_url": "índice.html",
   "display": "standalone",
   "background_color": "#f4f7f6",
   "theme_color": "#1a365d",
