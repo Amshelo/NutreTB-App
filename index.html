@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutreTB - Nuevos Horizontes</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1a365d">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 16px; background-color: #f4f7f6; color: #333; }
+    .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 16px; }
+    h1 { color: #1a365d; font-size: 20px; margin-top: 0; }
+    h2 { color: #2b6cb0; font-size: 16px; margin-top: 0; }
+    label { font-weight: bold; display: block; margin-top: 10px; font-size: 14px; }
+    input, select, button, textarea { width: 100%; padding: 12px; margin-top: 6px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; font-size: 14px; }
+    button { background-color: #2b6cb0; color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 16px; }
+    button:hover { background-color: #1a365d; }
+    .status { margin-top: 10px; padding: 10px; background: #e2e8f0; border-radius: 6px; font-size: 13px; }
+    .alert-warning { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
+    .alert-success { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
+    ul { padding-left: 20px; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <div class="card">
+    <h1>Asociación Nuevos Horizontes</h1>
+    <p style="margin:0; font-size: 14px; color: #666;">Panamá Oeste | Monitoreo Nutre TB</p>
+  </div>
+
+  <!-- 1. Datos Demográficos -->
+  <div class="card">
+    <h2>1. Datos Demográficos del Beneficiario</h2>
+    <form id="demoForm">
+      <label for="fullName">Nombre Completo o Alias / ID:</label>
+      <input type="text" id="fullName" placeholder="Ej. NH-8521 o Nombre" required>
+
+      <label for="cedula">Cédula / Documento:</label>
+      <input type="text" id="cedula" placeholder="Ej. 8-000-0000" required>
+
+      <label for="age">Edad:</label>
+      <input type="number" id="age" placeholder="Ej. 34" required>
+
+      <label for="gender">Género:</label>
+      <select id="gender">
+        <option value="Femenino">Femenino</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Otro / No especificado">Otro / No especificado</option>
+      </select>
+
+      <label for="district">Corregimiento / Distrito (Panamá Oeste):</label>
+      <select id="district">
+        <option value="La Chorrera">La Chorrera</option>
+        <option value="Arraiján">Arraiján</option>
+        <option value="Capira">Capira</option>
+        <option value="Chame">Chame</option>
+        <option value="San Carlos">San Carlos</option>
+      </select>
+
+      <button type="submit">Guardar Datos Demográficos</button>
+    </form>
+    <div id="demoStatus" class="status" style="display:none;"></div>
+  </div>
+
+  <!-- 2. Evolución de Peso y Salud -->
+  <div class="card">
+    <h2>2. Evolución de Peso y Comorbilidades</h2>
+    <form id="weightForm">
+      <label for="weight">Peso actual (libras):</label>
+      <input type="number" id="weight" step="0.1" placeholder="Ej. 135.5" required>
+
+      <label for="comorbidity">Condición o comorbilidad asociada:</label>
+      <select id="comorbidity">
+        <option value="Ninguna">Ninguna</option>
+        <option value="Diabetes">Diabetes Mellitus</option>
+        <option value="Hipertensión">Hipertensión</option>
+        <option value="VIH">VIH / Coinfección</option>
+        <option value="Otra">Otra condición</option>
+      </select>
+
+      <button type="submit">Registrar Control de Peso</button>
+    </form>
+    <h3>Historial de Peso Registrado:</h3>
+    <ul id="weightHistory"><li>Sin registros de peso aún.</li></ul>
+  </div>
+
+  <!-- 3. Alertas de Adherencia al Tratamiento -->
+  <div class="card">
+    <h2>3. Control de Adherencia al Tratamiento</h2>
+    <form id="adherenceForm">
+      <label for="tookMeds">¿Tomó su tratamiento de TB hoy?</label>
+      <select id="tookMeds">
+        <option value="Sí">Sí, tomé la dosis completa</option>
+        <option value="No - Falta de medicamento">No - Me quedé sin medicamento en el centro</option>
+        <option value="No - Efectos secundarios">No - Me sentí mal / efectos secundarios</option>
+        <option value="No - Olvido">No - Se me olvidó tomarlo</option>
+      </select>
+
+      <label for="sideEffects">Efectos secundarios o molestias (opcional):</label>
+      <textarea id="sideEffects" rows="2" placeholder="Ej. Náuseas, mareo, dolor abdominal..."></textarea>
+
+      <button type="submit" style="background-color: #2c7a7b;">Registrar Adherencia</button>
+    </form>
+    <div id="adherenceAlert" class="status" style="display:none;"></div>
+  </div>
+
+  <!-- 4. Registro y Solicitud de Entregas Nutre TB -->
+  <div class="card">
+    <h2>4. Registro y Solicitud de Entregas "Nutre TB"</h2>
+    <p style="font-size: 13px;">Programa de bolsas de alimentos y suplementos alimenticios.</p>
+    
+    <button id="btnNutreTB" style="background-color: #dd6b20;">Solicitar Nueva Bolsa Nutre TB</button>
+    
+    <h3>Estado de Entregas / Asistencias:</h3>
+    <ul id="deliveryList">
+      <li><strong>Entrega #1:</strong> Bolsa Nutre TB - <span style="color:green;">Entregada</span></li>
+    </ul>
+  </div>
+
+  <script>
+    // 1. Guardar Datos Demográficos
+    document.getElementById('demoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('fullName').value;
+      const district = document.getElementById('district').value;
+      
+      localStorage.setItem('demo_name', name);
+      localStorage.setItem('demo_district', district);
+      
+      const status = document.getElementById('demoStatus');
+      status.className = 'status alert-success';
+      status.style.display = 'block';
+      status.innerText = `Datos demográficos guardados para: ${name} (${district})`;
+    });
+
+    // 2. Historial de Evolución de Peso
+    let weights = JSON.parse(localStorage.getItem('weight_list')) || [];
+    function updateWeightUI() {
+      const list = document.getElementById('weightHistory');
+      if (weights.length > 0) {
+        list.innerHTML = weights.map(w => `<li><strong>${w.date}:</strong> ${w.weight} lbs (${w.comorbidity})</li>`).join('');
+      }
+    }
+    updateWeightUI();
+
+    document.getElementById('weightForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const wVal = document.getElementById('weight').value;
+      const cVal = document.getElementById('comorbidity').value;
+      const today = new Date().toLocaleDateString();
+
+      weights.push({ date: today, weight: wVal, comorbidity: cVal });
+      localStorage.setItem('weight_list', JSON.stringify(weights));
+      updateWeightUI();
+      document.getElementById('weight').value = '';
+    });
+
+    // 3. Alertas de Adherencia
+    document.getElementById('adherenceForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const took = document.getElementById('tookMeds').value;
+      const alertBox = document.getElementById('adherenceAlert');
+      
+      alertBox.style.display = 'block';
+      if (took === 'Sí') {
+        alertBox.className = 'status alert-success';
+        alertBox.innerText = '¡Excelente! Has registrado la toma exitosa de tu medicamento de hoy.';
+      } else {
+        alertBox.className = 'status alert-warning';
+        alertBox.innerText = `ALERTA DE ADHERENCIA REGISTRADA: "${took}". Se notificará al promotor de la Asociación para brindarle apoyo.`;
+      }
+    });
+
+    // 4. Registro y Solicitud de Entregas Nutre TB
+    document.getElementById('btnNutreTB').addEventListener('click', function() {
+      const list = document.getElementById('deliveryList');
+      const today = new Date().toLocaleDateString();
+      const newItem = document.createElement('li');
+      newItem.innerHTML = `<strong>Solicitud ${today}:</strong> Bolsa Nutre TB - <span style="color:#dd6b20;">En Proceso</span>`;
+      list.appendChild(newItem);
+    });
+
+    // Registro del Service Worker PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>
