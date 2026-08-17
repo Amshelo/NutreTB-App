@@ -140,7 +140,7 @@
         const list = document.getElementById('patientList');
         data.forEach(patient => {
           const li = document.createElement('li');
-          li.textContent = `Nombre: ${patient.Nombre}, Edad: ${patient.Edad}, Estado: ${patient['Estado CLIN']}`;
+          li.textContent = `Nombre: ${patient.Nombre}, Edad: ${patient.Edad}, Estado: ${patient['Estado Clínico']}`;
           list.appendChild(li);
         });
       })
