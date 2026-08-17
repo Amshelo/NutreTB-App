@@ -12,121 +12,70 @@
     h1 { color: #1a365d; font-size: 20px; margin-top: 0; }
     h2 { color: #2b6cb0; font-size: 16px; margin-top: 0; }
     label { font-weight: bold; display: block; margin-top: 10px; font-size: 14px; }
-    input, select, button, textarea { width: 100%; padding: 12px; margin-top: 6px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; font-size: 14px; }
+    input, select, button, textarea { width: 100%; padding: 6px; margin-top: 6px; border-radius: 6px; border: 1px solid #ccc; }
     button { background-color: #2b6cb0; color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 16px; }
     button:hover { background-color: #1a365d; }
     .status { margin-top: 10px; padding: 10px; background: #e2e8f0; border-radius: 6px; font-size: 13px; }
-    .alert-warning { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
-    .alert-success { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
-    ul { padding-left: 20px; font-size: 14px; }
+    .alert-success { background: #fff5f5; color: #c53030; border: 1px solid #feb2b2; }
+    .alert-warning { background: #e6fffa; color: #234e52; border: 1px solid #9ae6b4; }
   </style>
 </head>
 <body>
 
-  <!-- Encabezado -->
   <div class="card">
-    <h1>Asociación Nuevos Horizontes</h1>
-    <p style="margin:0; font-size: 14px; color: #666;">Panamá Oeste | Monitoreo Nutre TB</p>
-  </div>
-
-  <!-- 1. Datos Demográficos -->
-  <div class="card">
-    <h2>1. Datos Demográficos del Beneficiario</h2>
+    <h1>NutreTB</h1>
     <form id="demoForm">
-      <label for="fullName">Nombre Completo o Alias / ID:</label>
-      <input type="text" id="fullName" placeholder="Ej. NH-8521 o Nombre" required>
-
-      <label for="cedula">Cédula / Documento:</label>
-      <input type="text" id="cedula" placeholder="Ej. 8-000-0000" required>
-
-      <label for="age">Edad:</label>
-      <input type="number" id="age" placeholder="Ej. 34" required>
-
-      <label for="gender">Género:</label>
-      <select id="gender">
-        <option value="Femenino">Femenino</option>
-        <option value="Masculino">Masculino</option>
-        <option value="Otro / No especificado">Otro / No especificado</option>
-      </select>
-
-      <label for="district">Corregimiento / Distrito (Panamá Oeste):</label>
-      <select id="district">
-        <option value="La Chorrera">La Chorrera</option>
-        <option value="Arraiján">Arraiján</option>
-        <option value="Capira">Capira</option>
-        <option value="Chame">Chame</option>
-        <option value="San Carlos">San Carlos</option>
-      </select>
-
-      <button type="submit">Guardar Datos Demográficos</button>
+      <label for="name">Nombre</label>
+      <input type="text" id="name" required>
+      <label for="district">Distrito</label>
+      <input type="text" id="district" required>
+      <button type="submit">Guardar Datos</button>
     </form>
     <div id="demoStatus" class="status" style="display:none;"></div>
   </div>
 
-  <!-- 2. Evolución de Peso y Salud -->
   <div class="card">
-    <h2>2. Evolución de Peso y Comorbilidades</h2>
+    <h2>Evolución de Peso</h2>
     <form id="weightForm">
-      <label for="weight">Peso actual (libras):</label>
-      <input type="number" id="weight" step="0.1" placeholder="Ej. 135.5" required>
-
-      <label for="comorbidity">Condición o comorbilidad asociada:</label>
-      <select id="comorbidity">
-        <option value="Ninguna">Ninguna</option>
-        <option value="Diabetes">Diabetes Mellitus</option>
-        <option value="Hipertensión">Hipertensión</option>
-        <option value="VIH">VIH / Coinfección</option>
-        <option value="Otra">Otra condición</option>
-      </select>
-
-      <button type="submit">Registrar Control de Peso</button>
+      <label for="weight">Peso (lbs)</label>
+      <input type="number" id="weight" required>
+      <label for="comorbidity">Comorbilidad</label>
+      <input type="text" id="comorbidity">
+      <button type="submit">Registrar Peso</button>
     </form>
-    <h3>Historial de Peso Registrado:</h3>
-    <ul id="weightHistory"><li>Sin registros de peso aún.</li></ul>
+    <ul id="weightHistory"></ul>
   </div>
 
-  <!-- 3. Alertas de Adherencia al Tratamiento -->
   <div class="card">
-    <h2>3. Control de Adherencia al Tratamiento</h2>
+    <h2>Control de Adherencia</h2>
     <form id="adherenceForm">
-      <label for="tookMeds">¿Tomó su tratamiento de TB hoy?</label>
+      <label for="tookMeds">¿Tomó medicamento hoy?</label>
       <select id="tookMeds">
-        <option value="Sí">Sí, tomé la dosis completa</option>
-        <option value="No - Falta de medicamento">No - Me quedé sin medicamento en el centro</option>
-        <option value="No - Efectos secundarios">No - Me sentí mal / efectos secundarios</option>
-        <option value="No - Olvido">No - Se me olvidó tomarlo</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
       </select>
-
-      <label for="sideEffects">Efectos secundarios o molestias (opcional):</label>
-      <textarea id="sideEffects" rows="2" placeholder="Ej. Náuseas, mareo, dolor abdominal..."></textarea>
-
-      <button type="submit" style="background-color: #2c7a7b;">Registrar Adherencia</button>
+      <button type="submit">Registrar</button>
     </form>
     <div id="adherenceAlert" class="status" style="display:none;"></div>
   </div>
 
-  <!-- 4. Registro y Solicitud de Entregas Nutre TB -->
   <div class="card">
-    <h2>4. Registro y Solicitud de Entregas "Nutre TB"</h2>
-    <p style="font-size: 13px;">Programa de bolsas de alimentos y suplementos alimenticios.</p>
-    
-    <button id="btnNutreTB" style="background-color: #dd6b20;">Solicitar Nueva Bolsa Nutre TB</button>
-    
-    <h3>Estado de Entregas / Asistencias:</h3>
-    <ul id="deliveryList">
-      <li><strong>Entrega #1:</strong> Bolsa Nutre TB - <span style="color:green;">Entregada</span></li>
-    </ul>
+    <h2>Solicitud de Entregas</h2>
+    <button id="btnNutreTB">Solicitar Bolsa Nutre TB</button>
+    <ul id="deliveryList"></ul>
+  </div>
+
+  <div class="card">
+    <h2>Lista de Pacientes</h2>
+    <ul id="patientList"></ul>
   </div>
 
   <script>
-    // 1. Guardar Datos Demográficos
+    // 1. Datos demográficos
     document.getElementById('demoForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = document.getElementById('fullName').value;
+      const name = document.getElementById('name').value;
       const district = document.getElementById('district').value;
-      
-      localStorage.setItem('demo_name', name);
-      localStorage.setItem('demo_district', district);
       
       const status = document.getElementById('demoStatus');
       status.className = 'status alert-success';
@@ -149,7 +98,6 @@
       const wVal = document.getElementById('weight').value;
       const cVal = document.getElementById('comorbidity').value;
       const today = new Date().toLocaleDateString();
-
       weights.push({ date: today, weight: wVal, comorbidity: cVal });
       localStorage.setItem('weight_list', JSON.stringify(weights));
       updateWeightUI();
@@ -161,7 +109,6 @@
       e.preventDefault();
       const took = document.getElementById('tookMeds').value;
       const alertBox = document.getElementById('adherenceAlert');
-      
       alertBox.style.display = 'block';
       if (took === 'Sí') {
         alertBox.className = 'status alert-success';
@@ -185,12 +132,19 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     }
-  fetch('https://script.google.com/macros/s/AKfycbz-3WOJR5DFS6aeL81AqhsrPdmV1_WqfUmb-vGSOvVZ_hlzhf6-Seg-yLk1TO96DQHkrg/exec')
-    .then(response => response.json())
-    .then(data => {
-      console.log('Datos de pacientes:', data);
-    })
-    .catch(error => console.error('Error al obtener los datos:', error));
+
+    // 5. Cargar pacientes desde la hoja de cálculo
+    fetch('https://script.google.com/macros/s/AKfycbz-3WOJR5DFS6aeL81AqhsrPdmV1_WqfUmb-vGSOvVZ_hlzhf6-Seg-yLk1TO96DQHkrg/exec')
+      .then(response => response.json())
+      .then(data => {
+        const list = document.getElementById('patientList');
+        data.forEach(patient => {
+          const li = document.createElement('li');
+          li.textContent = `Nombre: ${patient.Nombre}, Edad: ${patient.Edad}, Estado: ${patient['Estado CLIN']}`;
+          list.appendChild(li);
+        });
+      })
+      .catch(error => console.error('Error al obtener los datos:', error));
   </script>
 </body>
 </html>
