@@ -185,6 +185,12 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     }
+  fetch('https://script.google.com/macros/s/AKfycbz-3WOJR5DFS6aeL81AqhsrPdmV1_WqfUmb-vGSOvVZ_hlzhf6-Seg-yLk1TO96DQHkrg/exec')
+    .then(response => response.json())
+    .then(data => {
+      console.log('Datos de pacientes:', data);
+    })
+    .catch(error => console.error('Error al obtener los datos:', error));
   </script>
 </body>
 </html>
